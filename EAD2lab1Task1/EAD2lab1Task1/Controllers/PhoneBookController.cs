@@ -21,13 +21,13 @@ namespace EAD2lab1Task1.Controllers
             new Contact{Id = 4, Name = "John Diez Daly", Address = "Kildare Way", PhoneNumber = "0881472583"},
             new Contact{Id = 5, Name = "John Diez Daly", Address = "Kildare Road", PhoneNumber = "0881472987"},
         };
-        public IHttpActionResult GetName(string n)
+        public IHttpActionResult GetName(string name)
         {
             List<Contact> myAL = new List<Contact>();
 
             //DB call using LINQ
             //Var = Generic Type
-            var contact = contacts.Where(c => c.Name == n);
+            var contact = contacts.Where(c => c.Name == name);
 
             foreach (var item in contact)
             {
