@@ -56,15 +56,15 @@ namespace EAD2CA1EX1.Controllers
         [Route("Update/{cityName:alpha}")]
         public IHttpActionResult PutUpdateCity(String cityName, Weather w)
         {
-            if(cityName != null)
+            if (cityName != null)
             {
-                Weather we = weather.SingleOrDefault(c => c.City.ToUpper() == cityName.ToUpper());
+                Weather wu = weather.SingleOrDefault(c => c.City.ToUpper() == cityName.ToUpper());
                 var result = weather.SingleOrDefault(c => c.City.ToUpper() == cityName.ToUpper());
-                if(result != null)
+                if (result != null)
                 {
                     try
                     {
-                        if(ModelState.IsValid)
+                        if (ModelState.IsValid)
                         {
                             weather.Remove(result);
                             weather.Add(w);
@@ -90,11 +90,11 @@ namespace EAD2CA1EX1.Controllers
         public IHttpActionResult DeleteCityObject(String cityName)
         {
             var result = weather.SingleOrDefault(c => c.City.ToUpper().Equals(cityName.ToUpper()));
-            if(cityName != null)
+            if (cityName != null)
             {
                 try
                 {
-                    if(ModelState.IsValid)
+                    if (ModelState.IsValid)
                     {
                         weather.Remove(result);
                         return Ok();
@@ -116,29 +116,44 @@ namespace EAD2CA1EX1.Controllers
             if (cityName != null) // check for null object
             {
                 var result = weather.SingleOrDefault(c => c.City.ToUpper().Equals(cityName.ToUpper()));
-                if(ModelState.IsValid)
+                if (result == null)
                 {
-                    // check to see if file exists
-                    if (!File.Exists("C:\\Test\\log.txt"))
+                    try
                     {
-                       File.Create("C:\\Test\\log.txt"));
-                    }
-                    // write message details to log file
-                    using (StreamWriter s = new StreamWriter("C:\\Test\\log.txt", true))
-                    {
-                        s.WriteLine("City: " + w.City 
-                                    + "\nTemperature: " + w.Temp 
-                                    + "\nWindspeed: " + w.WindSpeed 
-                                    + "\n " + DateTime.Now.ToLongTimeString()
-                                    + " " + DateTime.Now.ToLongDateString());
-                    }
+                        if (ModelState.IsValid)
+                        {
+                            // check to see if file exists
+                            if (!File.Exists("C:\\Test\\log.txt"))
+                            {
+                                File.Create("C:\\Test\\log.txt");
+                            }
+                            // write message details to log file
+                            using (StreamWriter s = new StreamWriter("C:\\Test\\log.txt", true))
+                            {
+                                s.WriteLine("City: " + w.City
+                                            + "\nTemperature: " + w.Temp
+                                            + "\nWindspeed: " + w.WindSpeed
+                                            + "\n " + DateTime.Now.ToLongTimeString()
+                                            + " " + DateTime.Now.ToLongDateString());
+                            }
 
-                    weather.Add(w); // Add this to the Collection
-                    // create HTTP response with Created status code and list....
-                    string uri = Url.Link("DefaultApi", new { controller = "Weather", id = w.WindSpeed});
-                    return Created(uri, w);
+                            weather.Add(w); // Add this to the Collection
+                            // create HTTP response with Created status code and list....
+                            string uri = Url.Link("DefaultApi", new { controller = "Weather", id = w.WindSpeed });
+                            return Created(uri, w);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        //throw;
+                    }
+                }
+                else
+                {
+                    return NotFound();
                 }
             }
+            return BadRequest();
         }
     }
 }
