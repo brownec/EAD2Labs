@@ -18,7 +18,7 @@ namespace EAD2_CA1_Client
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:3182/"); // This is your local Host
+                    client.BaseAddress = new Uri("http://localhost:9487/"); // This is your local Host
 
                     // add an Accept header for JSON
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -57,7 +57,7 @@ namespace EAD2_CA1_Client
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:3182/");  // This is your local Host
+                    client.BaseAddress = new Uri("http://localhost:9487/");  // This is your local Host
 
                     // add an Accept header for JSON
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -73,10 +73,10 @@ namespace EAD2_CA1_Client
                         // var listings = await response.Content.ReadAsAsync<IEnumerable<Weather>>(); 
                         // foreach (var listing in listings)
                         // {
-                        Console.WriteLine("City detail\n " +
+                        Console.WriteLine("City Details:\n " +
                                                 "\tCity: " + listing.City +
-                                                ",\tTemperature: " + listing.Temperature +
-                                                ",\tWindspeed: " + listing.WindSpeed);
+                                                "\tTemperature: " + listing.Temperature +
+                                                "\tWindspeed: " + listing.WindSpeed);
                         // }
                         Console.ReadLine();
                     }
@@ -99,7 +99,7 @@ namespace EAD2_CA1_Client
                 using (HttpClient client = new HttpClient())
                 {
                     // your own local host
-                    client.BaseAddress = new Uri("http://localhost:3182/");
+                    client.BaseAddress = new Uri("http://localhost:9487/");
 
                     // add an Accept header for JSON
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -115,9 +115,9 @@ namespace EAD2_CA1_Client
                         var listings = await response.Content.ReadAsAsync<IEnumerable<Weather>>();
                         foreach (var listing in listings)
                         {
-                            Console.WriteLine(",\tCity: " + listing.City +
-                                                ",\tTemperature: " + listing.Temperature +
-                                                ",\tWindspeed: " + listing.WindSpeed);
+                            Console.WriteLine("\tCity: " + listing.City +
+                                                "\tTemperature: " + listing.Temperature +
+                                                "\tWindspeed: " + listing.WindSpeed);
                         }
                         Console.ReadLine();
                     }
@@ -140,27 +140,27 @@ namespace EAD2_CA1_Client
             {
                 using (HttpClient client = new HttpClient())
                 {                                           //Your local host
-                    client.BaseAddress = new Uri("http://localhost:3182/");
+                    client.BaseAddress = new Uri("http://localhost:9487/");
 
                     // add an Accept header for JSON - preference for response 
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                     // ***********CREATE A NEW CITY TO BE ADDED TO THE COLLECTION***********
-                    Weather newListing = new Weather() { City = "Madrid", Temperature = 35, WindSpeed = 2, Condition = "sunny ", Warning = false };
+                    Weather newListing = new Weather() { City = "Madrid", Temperature = 35, WindSpeed = 2, Condition = "sunny", Warning = false };
 
-                    // Route Prefix(in Controller):  [Route("AddCity/{cityName:alpha}")]
+                    // Route Prefix(in Controller):  [Route("AddCity/{cityName:alpha}")]// poss madrid 
                     HttpResponseMessage response = await client.PostAsJsonAsync("Weather/AddCity/Madrid", newListing);//pass in object also
-                                                                                                            
+                                 
                     if (response.IsSuccessStatusCode) // if your getting a false response then check the URi being passed back in the controller                                                    
                     {
                         // print out
                         Uri newStockUri = response.Headers.Location;
                         var listing = await response.Content.ReadAsAsync<Weather>();
                         Console.WriteLine("URI for new resource: " + newStockUri.ToString());
-                        Console.WriteLine("City Added " +
-                                                ",City: " + listing.City +
-                                                ",\tTemperature: " + listing.Temperature +
-                                                ",\tWindspeed: " + listing.WindSpeed);
+                        Console.WriteLine("City Added: " +
+                                                "City: " + listing.City +
+                                                "\tTemperature: " + listing.Temperature +
+                                                "\tWindspeed: " + listing.WindSpeed);
                     }
                     else
                     {
@@ -181,7 +181,7 @@ namespace EAD2_CA1_Client
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:3182/");//Your local host
+                    client.BaseAddress = new Uri("http://localhost:9487/");//Your local host
 
                     // ***********CREATE NEW WEATHER OBJECT WITH UPDATED DETAILS*********** 
                     Weather listing = new Weather() { City = "Dublin", Temperature = 44, WindSpeed = 111, Condition = "Snow", Warning = false };
@@ -211,7 +211,7 @@ namespace EAD2_CA1_Client
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:3182/"); // your local host
+                    client.BaseAddress = new Uri("http://localhost:9487/"); // your local host
 
                     // Route Prefix(in Controller):  [Route("Delete/{cityName:alpha}")]                                                    
                     HttpResponseMessage response = await client.DeleteAsync("Weather/Delete/Madrid");
@@ -234,18 +234,18 @@ namespace EAD2_CA1_Client
         {
             GetAllAsync().Wait(); // Get all cities
 
-            DeleteAsync().Wait(); // Delete a city
+            AddAsync().Wait(); // Add a city
 
             UpdateAsync().Wait(); // Update an existing city
             GetAllAsync().Wait();
 
-            AddAsync().Wait(); // Add a city
-           
             GetAllAsync().Wait();
             GetCityWarnAsync().Wait(); // Get warnings
 
             GetOneAsync().Wait(); // Get one City details
             GetAllAsync().Wait();
+
+            DeleteAsync().Wait(); // Delete a city
         }
     }
 }

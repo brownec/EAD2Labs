@@ -18,7 +18,7 @@ namespace EAD2_CA1_Server.Controllers
             new Weather{City = "Dublin", Temperature = 17, WindSpeed = 15, Condition = "Cloudy", Warning = false},
             new Weather{City = "Derry", Temperature = 12, WindSpeed = 26, Condition = "Windy", Warning = false},
             new Weather{City = "London", Temperature = 7, WindSpeed = 88, Condition = "Stormy", Warning = true},
-            new Weather{City = "Athens", Temperature = 2, WindSpeed = 51, Condition = "Floods", Warning = true},
+            new Weather{City = "Athens", Temperature = 2, WindSpeed = 51, Condition = "Floods", Warning = true}
         };
 
         // GET | GET WEATHER INFORMATION FOR ALL CITIES
@@ -44,6 +44,7 @@ namespace EAD2_CA1_Server.Controllers
                 }
                 else
                 {
+                    Console.WriteLine("Bad Request Specific City");
                     return BadRequest(); // no match found
                 }
             }
@@ -86,6 +87,7 @@ namespace EAD2_CA1_Server.Controllers
                 }
                 else
                 {
+                    Console.WriteLine("Bad Request Update");
                     return BadRequest();
                 }
             }
@@ -116,54 +118,69 @@ namespace EAD2_CA1_Server.Controllers
             return NotFound(); // parameter passed not found
         }
 
+        // object on;y ma
         // POST | ADD A NEW CITY TO THE COLLECTION
         [Route("AddCity/{cityName:alpha}")]
-        public IHttpActionResult PostWeatherObject(String cityName, Weather w)
+        //public IHttpActionResult PostWeatherObject(String cityName, Weather w)
+            public IHttpActionResult PostWeatherObject(Weather w)
         {
-            if (cityName != null)
-            {
-                var result = weather.SingleOrDefault(c => c.City.ToLower().Equals(cityName.ToLower()));
-                if (result == null) // if not in DB
-                {
-                    try
-                    {
+            //if (cityName != null)
+            //{
+            //    var result = weather.SingleOrDefault(c => c.City.ToLower().Equals(cityName.ToLower()));
+            //    if (result == null) // if not in DB
+            //    {
+            //        try
+            //        {
                         if (ModelState.IsValid)
                         {
+                            var result = weather.FirstOrDefault(c => c.City.ToLower() ==(w.City.ToLower()));
                             // check if file exists
-                            if (!File.Exists("C:\\Test\\log.txt"))
-                            {
-                                File.Create("C:\\Test\\log.txt");
+                            //if (!File.Exists("C:\\Test\\log.txt"))
+                            //{
+                            //    File.Create("C:\\Test\\log.txt");
 
-                                // write message details to log file
-                                using (StreamWriter s = new StreamWriter("C:\\Test\\log.txt", true))
-                                {
-                                    s.WriteLine("City: " + w.City
-                                                         + "\nConditions: " + w.Condition
-                                                         + "\nOther Details: " + w.WindSpeed
-                                                         + "\n " + DateTime.Now.ToLongTimeString()
-                                                         + " " + DateTime.Now.ToLongDateString());
-                                }
-                                // Add to the existing collection
-                                weather.Add(w); // add this to the collection
-                                // create Http response with Created status code andlisting serialized as content and 
-                                // location header set to uri for new resource
-                                // "id" variable must match in the WebApiConfig.cs file
+                            //    // write message details to log file
+                            //    using (StreamWriter s = new StreamWriter("C:\\Test\\log.txt", true))
+                            //    {
+                            //        s.WriteLine("City: " + w.City
+                            //                             + "\nConditions: " + w.Condition
+                            //                             + "\nOther Details: " + w.WindSpeed
+                            //                             + "\n " + DateTime.Now.ToLongTimeString()
+                            //                             + " " + DateTime.Now.ToLongDateString());
+                            //    }
+                            //    // Add to the existing collection
+                            //    weather.Add(w); // add this to the collection
+                            //    // create Http response with Created status code andlisting serialized as content and 
+                            //    // location header set to uri for new resource
+                            //    // "id" variable must match in the WebApiConfig.cs file
+                            //    string uri = Url.Link("DefaultApi", new { controller = "Weather", id = w.WindSpeed });
+                            //    return Created(uri, w);
+                            //}
+
+                            if(result == null)
+                            {
+                                weather.Add(w);
                                 string uri = Url.Link("DefaultApi", new { controller = "Weather", id = w.WindSpeed });
                                 return Created(uri, w);
                             }
+                            else
+	                        {
+                                return NotFound();
+	                        }
                         }
-                    }
-                    catch (Exception e)
-                    {
-                        // throw;
-                    }
-                }
+                    //}
+                //    catch (Exception e)
+                //    {
+                //        // throw;
+                //    }
+                //}
                 else
                 {
-                    return NotFound();
+                    return BadRequest();
                 }
             }
-            return BadRequest();
-        }
+            //Console.WriteLine("Bad Request Add City");
+    //        return BadRequest();
     }
 }
+//}
