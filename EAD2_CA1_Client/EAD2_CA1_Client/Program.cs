@@ -28,14 +28,16 @@ namespace EAD2_CA1_Client
                     HttpResponseMessage response = await client.GetAsync("Weather");
                     if (response.IsSuccessStatusCode)
                     {
-                        Console.WriteLine("City Details:\n ");
+                        Console.WriteLine("Weather information for all cities:\n");
                         // read result 
                         var listings = await response.Content.ReadAsAsync<IEnumerable<Weather>>();
                         foreach (var listing in listings)
                         {
-                            Console.WriteLine(  "\tCity: " + listing.City +
-                                                "\tTemperature: " + listing.Temperature +
-                                                "\tWindspeed: " + listing.WindSpeed);
+                            Console.WriteLine( "City: " + listing.City +
+                                                ", Temperature: " + listing.Temperature +
+                                                ", Windspeed: " + listing.WindSpeed +
+                                                ", Condition: " + listing.Condition + 
+                                                ", Warning: " + listing.Warning);
                         }
                         Console.ReadLine();
                     }
@@ -73,10 +75,12 @@ namespace EAD2_CA1_Client
                         // var listings = await response.Content.ReadAsAsync<IEnumerable<Weather>>(); 
                         // foreach (var listing in listings)
                         // {
-                        Console.WriteLine("City Details:\n " +
-                                                "\tCity: " + listing.City +
-                                                "\tTemperature: " + listing.Temperature +
-                                                "\tWindspeed: " + listing.WindSpeed);
+                        Console.WriteLine("Weather information for following specific city:\n " +
+                                                "City: " + listing.City +
+                                                ", Temperature: " + listing.Temperature +
+                                                ", Windspeed: " + listing.WindSpeed +
+                                                ", Condition: " + listing.Condition +
+                                                ", Warning: " + listing.Warning);
                         // }
                         Console.ReadLine();
                     }
@@ -110,14 +114,16 @@ namespace EAD2_CA1_Client
 
                     if (response.IsSuccessStatusCode)
                     {
-                        Console.WriteLine("City Weather Warnings: ");
+                        Console.WriteLine("Weather warning in place: ");
                         // read result 
                         var listings = await response.Content.ReadAsAsync<IEnumerable<Weather>>();
                         foreach (var listing in listings)
                         {
-                            Console.WriteLine("\tCity: " + listing.City +
-                                                "\tTemperature: " + listing.Temperature +
-                                                "\tWindspeed: " + listing.WindSpeed);
+                            Console.WriteLine("City: " + listing.City +
+                                                ", Temperature: " + listing.Temperature +
+                                                ", Windspeed: " + listing.WindSpeed +
+                                                ", Condition: " + listing.Condition +
+                                                ", Warning: " + listing.Warning);
                         }
                         Console.ReadLine();
                     }
@@ -154,13 +160,15 @@ namespace EAD2_CA1_Client
                     if (response.IsSuccessStatusCode) // if your getting a false response then check the URi being passed back in the controller                                                    
                     {
                         // print out
-                        Uri newStockUri = response.Headers.Location;
+                        Uri newWeatherUri = response.Headers.Location;
                         var listing = await response.Content.ReadAsAsync<Weather>();
-                        Console.WriteLine("URI for new resource: " + newStockUri.ToString());
-                        Console.WriteLine("City Added: " +
+                        Console.WriteLine("URI for new resource added is: " + newWeatherUri.ToString() + "\n");
+                        Console.WriteLine("New City Added:\n " +
                                                 "City: " + listing.City +
-                                                "\tTemperature: " + listing.Temperature +
-                                                "\tWindspeed: " + listing.WindSpeed);
+                                                ", Temperature: " + listing.Temperature +
+                                                ", Windspeed: " + listing.WindSpeed +
+                                                ", Condition: " + listing.Condition +
+                                                ", Warning: " + listing.Warning);
                     }
                     else
                     {
@@ -194,7 +202,7 @@ namespace EAD2_CA1_Client
                     }
                     else
                     {
-                        Console.WriteLine("City Updated - Dublin");
+                        Console.WriteLine("Weather information update for: Dublin");
                     }
                 }
             }
@@ -233,19 +241,25 @@ namespace EAD2_CA1_Client
         static void Main(string[] args)
         {
             GetAllAsync().Wait(); // Get all cities
+            Console.WriteLine("--------------------------------------------");
 
             AddAsync().Wait(); // Add a city
+            GetAllAsync().Wait();
+            Console.WriteLine("--------------------------------------------");
+
+            GetCityWarnAsync().Wait(); // Get warnings
+            // GetAllAsync().Wait();
+            Console.WriteLine("--------------------------------------------");
 
             UpdateAsync().Wait(); // Update an existing city
-            GetAllAsync().Wait();
-
-            GetAllAsync().Wait();
-            GetCityWarnAsync().Wait(); // Get warnings
-
+            Console.WriteLine("--------------------------------------------");
+            
             GetOneAsync().Wait(); // Get one City details
-            GetAllAsync().Wait();
+            //GetAllAsync().Wait();
+            Console.WriteLine("--------------------------------------------");
 
             DeleteAsync().Wait(); // Delete a city
+            GetAllAsync().Wait();
         }
     }
 }
