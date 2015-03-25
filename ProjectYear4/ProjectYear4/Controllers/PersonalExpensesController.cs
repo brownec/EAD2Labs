@@ -10,107 +10,107 @@ using ProjectYear4.Models;
 
 namespace ProjectYear4.Controllers
 {
-    public class BudgetUsersController : Controller
+    public class PersonalExpensesController : Controller
     {
         private MyDBConnection db = new MyDBConnection();
 
-        // GET: BudgetUsers
+        // GET: PersonalExpenses
         public ActionResult Index()
         {
-            return View(db.BudgetUser.ToList());
+            return View(db.PersonalExpenses.ToList());
         }
 
-        // GET: BudgetUsers/Details/5
+        // GET: PersonalExpenses/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BudgetUser budgetUser = db.BudgetUser.Find(id);
-            if (budgetUser == null)
+            PersonalExpense personalExpense = db.PersonalExpenses.Find(id);
+            if (personalExpense == null)
             {
                 return HttpNotFound();
             }
-            return View(budgetUser);
+            return View(personalExpense);
         }
 
-        // GET: BudgetUsers/Create
+        // GET: PersonalExpenses/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: BudgetUsers/Create
+        // POST: PersonalExpenses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BudgetUserId,LastName,FirstName,DateOfBirth,AddressLine1,AddressLine2,Town,County,Country,PostCode,ContactNo")] BudgetUser budgetUser)
+        public ActionResult Create([Bind(Include = "PersonalExpenseId,SocialAmount,GymMembershipAmount,SportsFeeAmount,HolidayAmount,SavingsAmount,LoanRepaymentAmount,PersonalExpenseOther")] PersonalExpense personalExpense)
         {
             if (ModelState.IsValid)
             {
-                db.BudgetUser.Add(budgetUser);
+                db.PersonalExpenses.Add(personalExpense);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(budgetUser);
+            return View(personalExpense);
         }
 
-        // GET: BudgetUsers/Edit/5
+        // GET: PersonalExpenses/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BudgetUser budgetUser = db.BudgetUser.Find(id);
-            if (budgetUser == null)
+            PersonalExpense personalExpense = db.PersonalExpenses.Find(id);
+            if (personalExpense == null)
             {
                 return HttpNotFound();
             }
-            return View(budgetUser);
+            return View(personalExpense);
         }
 
-        // POST: BudgetUsers/Edit/5
+        // POST: PersonalExpenses/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BudgetUserId,LastName,FirstName,DateOfBirth,AddressLine1,AddressLine2,Town,County,Country,PostCode,ContactNo")] BudgetUser budgetUser)
+        public ActionResult Edit([Bind(Include = "PersonalExpenseId,SocialAmount,GymMembershipAmount,SportsFeeAmount,HolidayAmount,SavingsAmount,LoanRepaymentAmount,PersonalExpenseOther")] PersonalExpense personalExpense)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(budgetUser).State = EntityState.Modified;
+                db.Entry(personalExpense).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(budgetUser);
+            return View(personalExpense);
         }
 
-        // GET: BudgetUsers/Delete/5
+        // GET: PersonalExpenses/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BudgetUser budgetUser = db.BudgetUser.Find(id);
-            if (budgetUser == null)
+            PersonalExpense personalExpense = db.PersonalExpenses.Find(id);
+            if (personalExpense == null)
             {
                 return HttpNotFound();
             }
-            return View(budgetUser);
+            return View(personalExpense);
         }
 
-        // POST: BudgetUsers/Delete/5
+        // POST: PersonalExpenses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            BudgetUser budgetUser = db.BudgetUser.Find(id);
-            db.BudgetUser.Remove(budgetUser);
+            PersonalExpense personalExpense = db.PersonalExpenses.Find(id);
+            db.PersonalExpenses.Remove(personalExpense);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

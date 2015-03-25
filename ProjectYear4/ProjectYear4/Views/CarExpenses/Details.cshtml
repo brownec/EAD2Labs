@@ -1,0 +1,66 @@
+﻿@model ProjectYear4.Models.CarExpense
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CarExpense</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Budget.BudgetId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Budget.BudgetId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarInsurance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarInsurance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Maintenance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Maintenance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FuelType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FuelType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NctTest)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NctTest)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CarExpenseId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

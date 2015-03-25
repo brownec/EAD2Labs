@@ -189,16 +189,27 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BudgetsController.cs" />
     <Compile Include="Controllers\BudgetUsersController.cs" />
+    <Compile Include="Controllers\CarExpensesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HouseholdExpensesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PersonalExpensesController.cs" />
+    <Compile Include="Controllers\UtilityBillExpensesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Budget.cs" />
     <Compile Include="Models\BudgetUser.cs" />
+    <Compile Include="Models\CarExpense.cs" />
+    <Compile Include="Models\HouseholdExpense.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MyDBConnection.cs" />
+    <Compile Include="Models\PersonalExpense.cs" />
+    <Compile Include="Models\UtilityBillExpense.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -269,6 +280,31 @@
     <Content Include="Views\BudgetUsers\Details.cshtml" />
     <Content Include="Views\BudgetUsers\Edit.cshtml" />
     <Content Include="Views\BudgetUsers\Index.cshtml" />
+    <Content Include="Views\Budgets\Create.cshtml" />
+    <Content Include="Views\Budgets\Delete.cshtml" />
+    <Content Include="Views\Budgets\Details.cshtml" />
+    <Content Include="Views\Budgets\Edit.cshtml" />
+    <Content Include="Views\Budgets\Index.cshtml" />
+    <Content Include="Views\CarExpenses\Create.cshtml" />
+    <Content Include="Views\CarExpenses\Delete.cshtml" />
+    <Content Include="Views\CarExpenses\Details.cshtml" />
+    <Content Include="Views\CarExpenses\Edit.cshtml" />
+    <Content Include="Views\CarExpenses\Index.cshtml" />
+    <Content Include="Views\UtilityBillExpenses\Create.cshtml" />
+    <Content Include="Views\UtilityBillExpenses\Delete.cshtml" />
+    <Content Include="Views\UtilityBillExpenses\Details.cshtml" />
+    <Content Include="Views\UtilityBillExpenses\Edit.cshtml" />
+    <Content Include="Views\UtilityBillExpenses\Index.cshtml" />
+    <Content Include="Views\HouseholdExpenses\Create.cshtml" />
+    <Content Include="Views\HouseholdExpenses\Delete.cshtml" />
+    <Content Include="Views\HouseholdExpenses\Details.cshtml" />
+    <Content Include="Views\HouseholdExpenses\Edit.cshtml" />
+    <Content Include="Views\HouseholdExpenses\Index.cshtml" />
+    <Content Include="Views\PersonalExpenses\Create.cshtml" />
+    <Content Include="Views\PersonalExpenses\Delete.cshtml" />
+    <Content Include="Views\PersonalExpenses\Details.cshtml" />
+    <Content Include="Views\PersonalExpenses\Edit.cshtml" />
+    <Content Include="Views\PersonalExpenses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

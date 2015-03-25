@@ -11,8 +11,7 @@ namespace ProjectYear4.Models
 {
     public class BudgetUser
     {
-        [Key]
-        public int id { get; set; }
+        public int BudgetUserId { get; set; }
 
         [Required]
         [StringLength(50, ErrorMessage = "Last name cannot be longer than 50 characters.")]
@@ -76,14 +75,10 @@ namespace ProjectYear4.Models
             return re.IsMatch(inputEmail);
         }
 
-        //[Required(ErrorMessage="Email Address is Mandatory")]
-        //[Display(Name="Email")]
-        //public String EmailAddress { get; set; }
+
+        public virtual ICollection<Budget> Budgets { get; set; }
     }
 
-    public class BudgetUserDBContext : DbContext
-    {
-        public DbSet<BudgetUser> Users { get; set; }
-    }
+   
 
 }

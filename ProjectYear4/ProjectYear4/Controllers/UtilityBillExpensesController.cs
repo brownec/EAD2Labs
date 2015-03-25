@@ -10,107 +10,112 @@ using ProjectYear4.Models;
 
 namespace ProjectYear4.Controllers
 {
-    public class BudgetUsersController : Controller
+    public class UtilityBillExpensesController : Controller
     {
         private MyDBConnection db = new MyDBConnection();
 
-        // GET: BudgetUsers
+        // GET: UtilityBillExpenses
         public ActionResult Index()
         {
-            return View(db.BudgetUser.ToList());
+            var utilityBillExpense = db.UtilityBillExpense.Include(u => u.Budget);
+            return View(utilityBillExpense.ToList());
         }
 
-        // GET: BudgetUsers/Details/5
+        // GET: UtilityBillExpenses/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BudgetUser budgetUser = db.BudgetUser.Find(id);
-            if (budgetUser == null)
+            UtilityBillExpense utilityBillExpense = db.UtilityBillExpense.Find(id);
+            if (utilityBillExpense == null)
             {
                 return HttpNotFound();
             }
-            return View(budgetUser);
+            return View(utilityBillExpense);
         }
 
-        // GET: BudgetUsers/Create
+        // GET: UtilityBillExpenses/Create
         public ActionResult Create()
         {
+            ViewBag.BudgetId = new SelectList(db.Budget, "BudgetId", "BudgetId");
             return View();
         }
 
-        // POST: BudgetUsers/Create
+        // POST: UtilityBillExpenses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BudgetUserId,LastName,FirstName,DateOfBirth,AddressLine1,AddressLine2,Town,County,Country,PostCode,ContactNo")] BudgetUser budgetUser)
+        public ActionResult Create([Bind(Include = "UtilityBillExpenseId,Electricity,Gas,RefuseCollection,IrishWater,BudgetId")] UtilityBillExpense utilityBillExpense)
         {
             if (ModelState.IsValid)
             {
-                db.BudgetUser.Add(budgetUser);
+                db.UtilityBillExpense.Add(utilityBillExpense);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(budgetUser);
+            ViewBag.BudgetId = new SelectList(db.Budget, "BudgetId", "BudgetId", utilityBillExpense.BudgetId);
+            return View(utilityBillExpense);
         }
 
-        // GET: BudgetUsers/Edit/5
+        // GET: UtilityBillExpenses/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BudgetUser budgetUser = db.BudgetUser.Find(id);
-            if (budgetUser == null)
+            UtilityBillExpense utilityBillExpense = db.UtilityBillExpense.Find(id);
+            if (utilityBillExpense == null)
             {
                 return HttpNotFound();
             }
-            return View(budgetUser);
+            ViewBag.BudgetId = new SelectList(db.Budget, "BudgetId", "BudgetId", utilityBillExpense.BudgetId);
+            return View(utilityBillExpense);
         }
 
-        // POST: BudgetUsers/Edit/5
+        // POST: UtilityBillExpenses/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BudgetUserId,LastName,FirstName,DateOfBirth,AddressLine1,AddressLine2,Town,County,Country,PostCode,ContactNo")] BudgetUser budgetUser)
+        public ActionResult Edit([Bind(Include = "UtilityBillExpenseId,Electricity,Gas,RefuseCollection,IrishWater,BudgetId")] UtilityBillExpense utilityBillExpense)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(budgetUser).State = EntityState.Modified;
+                db.Entry(utilityBillExpense).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(budgetUser);
+            ViewBag.BudgetId = new SelectList(db.Budget, "BudgetId", "BudgetId", utilityBillExpense.BudgetId);
+            return View(utilityBillExpense);
         }
 
-        // GET: BudgetUsers/Delete/5
+        // GET: UtilityBillExpenses/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BudgetUser budgetUser = db.BudgetUser.Find(id);
-            if (budgetUser == null)
+            UtilityBillExpense utilityBillExpense = db.UtilityBillExpense.Find(id);
+            if (utilityBillExpense == null)
             {
                 return HttpNotFound();
             }
-            return View(budgetUser);
+            return View(utilityBillExpense);
         }
 
-        // POST: BudgetUsers/Delete/5
+        // POST: UtilityBillExpenses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            BudgetUser budgetUser = db.BudgetUser.Find(id);
-            db.BudgetUser.Remove(budgetUser);
+            UtilityBillExpense utilityBillExpense = db.UtilityBillExpense.Find(id);
+            db.UtilityBillExpense.Remove(utilityBillExpense);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

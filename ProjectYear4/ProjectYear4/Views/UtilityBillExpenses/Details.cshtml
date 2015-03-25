@@ -1,0 +1,58 @@
+﻿@model ProjectYear4.Models.UtilityBillExpense
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UtilityBillExpense</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Budget.BudgetId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Budget.BudgetId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Electricity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Electricity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefuseCollection)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefuseCollection)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IrishWater)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IrishWater)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UtilityBillExpenseId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

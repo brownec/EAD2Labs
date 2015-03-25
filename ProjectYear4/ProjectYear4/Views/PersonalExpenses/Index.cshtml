@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ProjectYear4.Models.PersonalExpense>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SocialAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GymMembershipAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SportsFeeAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HolidayAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SavingsAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoanRepaymentAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonalExpenseOther)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SocialAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GymMembershipAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SportsFeeAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HolidayAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SavingsAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoanRepaymentAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonalExpenseOther)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PersonalExpenseId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PersonalExpenseId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PersonalExpenseId })
+        </td>
+    </tr>
+}
+
+</table>

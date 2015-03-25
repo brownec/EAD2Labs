@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ProjectYear4.Models.Budget>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BudgetUser.BudgetUserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BudgetUser.LastName)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BudgetUser.BudgetUserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BudgetUser.LastName)
+        </td>
+        <td>
+            @Html.ActionLink("New Budget", "Edit", new { id=item.BudgetId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BudgetId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BudgetId })
+            drop down list that gary showed
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ProjectYear4.Models.CarExpense>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Budget.BudgetId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarTax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarInsurance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Maintenance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FuelType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NctTest)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Budget.BudgetId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarTax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarInsurance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Maintenance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FuelType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NctTest)
+        </td>
+
+        <td>
+            <div class="btn-group">
+                <a href="#" class="dropdown-toggle, btn btn-info btn-large" data-toggle="dropdown"
+                   row="button" aria-expanded="false">Select Expense <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Edit", "Edit", new { id = item.CarExpenseId })</li>
+                    <li>@Html.ActionLink("Details", "Details", new { id = item.CarExpenseId })</li>
+                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.CarExpenseId })</li>
+                </ul>
+            </div>
+        </td>
+
+    </tr>
+}
+
+</table>

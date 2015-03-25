@@ -1,0 +1,64 @@
+﻿@model ProjectYear4.Models.UtilityBillExpense
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>UtilityBillExpense</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Budget.BudgetId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Budget.BudgetId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Electricity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Electricity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefuseCollection)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefuseCollection)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IrishWater)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IrishWater)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

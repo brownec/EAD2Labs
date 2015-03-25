@@ -1,0 +1,74 @@
+﻿@model ProjectYear4.Models.PersonalExpense
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PersonalExpense</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SocialAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SocialAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GymMembershipAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GymMembershipAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SportsFeeAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SportsFeeAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HolidayAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HolidayAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SavingsAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SavingsAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoanRepaymentAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoanRepaymentAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonalExpenseOther)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonalExpenseOther)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PersonalExpenseId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

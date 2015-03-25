@@ -10,107 +10,107 @@ using ProjectYear4.Models;
 
 namespace ProjectYear4.Controllers
 {
-    public class BudgetUsersController : Controller
+    public class HouseholdExpensesController : Controller
     {
         private MyDBConnection db = new MyDBConnection();
 
-        // GET: BudgetUsers
+        // GET: HouseholdExpenses
         public ActionResult Index()
         {
-            return View(db.BudgetUser.ToList());
+            return View(db.HouseholdExpenses.ToList());
         }
 
-        // GET: BudgetUsers/Details/5
+        // GET: HouseholdExpenses/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BudgetUser budgetUser = db.BudgetUser.Find(id);
-            if (budgetUser == null)
+            HouseholdExpense householdExpense = db.HouseholdExpenses.Find(id);
+            if (householdExpense == null)
             {
                 return HttpNotFound();
             }
-            return View(budgetUser);
+            return View(householdExpense);
         }
 
-        // GET: BudgetUsers/Create
+        // GET: HouseholdExpenses/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: BudgetUsers/Create
+        // POST: HouseholdExpenses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BudgetUserId,LastName,FirstName,DateOfBirth,AddressLine1,AddressLine2,Town,County,Country,PostCode,ContactNo")] BudgetUser budgetUser)
+        public ActionResult Create([Bind(Include = "HouseholdExpenseId,RentType,RentAmount,GroceryAmount,ClothingAmount,EducationFeesAmount,SchoolBooksAmount,MedicalBillAmount,HouseholdOtherAmount")] HouseholdExpense householdExpense)
         {
             if (ModelState.IsValid)
             {
-                db.BudgetUser.Add(budgetUser);
+                db.HouseholdExpenses.Add(householdExpense);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(budgetUser);
+            return View(householdExpense);
         }
 
-        // GET: BudgetUsers/Edit/5
+        // GET: HouseholdExpenses/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BudgetUser budgetUser = db.BudgetUser.Find(id);
-            if (budgetUser == null)
+            HouseholdExpense householdExpense = db.HouseholdExpenses.Find(id);
+            if (householdExpense == null)
             {
                 return HttpNotFound();
             }
-            return View(budgetUser);
+            return View(householdExpense);
         }
 
-        // POST: BudgetUsers/Edit/5
+        // POST: HouseholdExpenses/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BudgetUserId,LastName,FirstName,DateOfBirth,AddressLine1,AddressLine2,Town,County,Country,PostCode,ContactNo")] BudgetUser budgetUser)
+        public ActionResult Edit([Bind(Include = "HouseholdExpenseId,RentType,RentAmount,GroceryAmount,ClothingAmount,EducationFeesAmount,SchoolBooksAmount,MedicalBillAmount,HouseholdOtherAmount")] HouseholdExpense householdExpense)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(budgetUser).State = EntityState.Modified;
+                db.Entry(householdExpense).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(budgetUser);
+            return View(householdExpense);
         }
 
-        // GET: BudgetUsers/Delete/5
+        // GET: HouseholdExpenses/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BudgetUser budgetUser = db.BudgetUser.Find(id);
-            if (budgetUser == null)
+            HouseholdExpense householdExpense = db.HouseholdExpenses.Find(id);
+            if (householdExpense == null)
             {
                 return HttpNotFound();
             }
-            return View(budgetUser);
+            return View(householdExpense);
         }
 
-        // POST: BudgetUsers/Delete/5
+        // POST: HouseholdExpenses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            BudgetUser budgetUser = db.BudgetUser.Find(id);
-            db.BudgetUser.Remove(budgetUser);
+            HouseholdExpense householdExpense = db.HouseholdExpenses.Find(id);
+            db.HouseholdExpenses.Remove(householdExpense);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
