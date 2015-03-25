@@ -134,28 +134,28 @@ namespace EAD2_CA1_Server.Controllers
                         if (ModelState.IsValid)
                         {
                             var result = weather.FirstOrDefault(c => c.City.ToLower() ==(w.City.ToLower()));
-                            // check if file exists
-                            //if (!File.Exists("C:\\Test\\log.txt"))
-                            //{
-                            //    File.Create("C:\\Test\\log.txt");
+                             // check if file exists
+                            if (!File.Exists("C:\\Test\\log.txt"))
+                            {
+                                File.Create("C:\\Test\\log.txt");
 
-                            //    // write message details to log file
-                            //    using (StreamWriter s = new StreamWriter("C:\\Test\\log.txt", true))
-                            //    {
-                            //        s.WriteLine("City: " + w.City
-                            //                             + "\nConditions: " + w.Condition
-                            //                             + "\nOther Details: " + w.WindSpeed
-                            //                             + "\n " + DateTime.Now.ToLongTimeString()
-                            //                             + " " + DateTime.Now.ToLongDateString());
-                            //    }
-                            //    // Add to the existing collection
-                            //    weather.Add(w); // add this to the collection
-                            //    // create Http response with Created status code andlisting serialized as content and 
-                            //    // location header set to uri for new resource
-                            //    // "id" variable must match in the WebApiConfig.cs file
-                            //    string uri = Url.Link("DefaultApi", new { controller = "Weather", id = w.WindSpeed });
-                            //    return Created(uri, w);
-                            //}
+                                // write message details to log file
+                                using (StreamWriter s = new StreamWriter("C:\\Test\\log.txt", true))
+                                {
+                                    s.WriteLine("City: " + w.City
+                                                         + "\nConditions: " + w.Condition
+                                                         + "\nOther Details: " + w.WindSpeed
+                                                         + "\n " + DateTime.Now.ToLongTimeString()
+                                                         + " " + DateTime.Now.ToLongDateString());
+                                }
+                                // Add to the existing collection
+                                weather.Add(w); // add this to the collection
+                                // create Http response with Created status code andlisting serialized as content and 
+                                // location header set to uri for new resource
+                                // "id" variable must match in the WebApiConfig.cs file
+                                string uri = Url.Link("DefaultApi", new { controller = "Weather", id = w.WindSpeed });
+                                return Created(uri, w);
+                            }
 
                             if(result == null)
                             {

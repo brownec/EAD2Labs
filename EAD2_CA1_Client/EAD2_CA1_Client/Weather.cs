@@ -19,7 +19,7 @@ namespace EAD2_CA1_Server.Models
         // [Range(0, 200, ErrorMessage = "Windspeed measured between 0 and 200 Km/h")]
         public int WindSpeed { get; set; }
 
-        // [Required(ErrorMessage = "Must include weather condition(Sunny, Sno, Cloudy...")]
+        // [Required(ErrorMessage = "Must include weather condition(Sunny, Snow, Cloudy...")]
         public String Condition { get; set; }
 
         // [Required(ErrorMessage = "Weather warning in place must be True or False")]
